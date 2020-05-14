@@ -1,0 +1,67 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<h1>The future of combating COVID-19</h1>
+
+<div class="left">  
+  <article>
+    <h2>The Corona Virus</h2>
+    <p>Integer rutrum cursus diam, ut auctor elit malesuada id. Mauris nec arcu condimentum, gravida mauris vitae, molestie risus. 
+      Ut eget imperdiet diam, sed aliquam elit. Pellentesque non neque vitae neque vulputate volutpat tincidunt quis arcu. In hac 
+      habitasse platea dictumst. In vel urna leo. Nulla facilisi. Maecenas volutpat nunc a aliquam tristique. Nam eros erat, egestas 
+      quis lectus eu, luctus euismod metus. Aliquam ut leo ultrices, rhoncus ante vehicula, feugiat sapien. Duis ac lorem a nibh sodales
+      finibus. Donec pulvinar dui diam, ut euismod lorem imperdiet ac.</p>
+  </article>
+</div>
+
+<div class="right">
+  <div class="content-section">
+  <form method="POST" action="">
+    {{ form.hidden_tag() }}
+    <fieldset class="form-group">
+      <div class="form-group">
+        {{ form.username.label(class="form-control-label") }}
+
+        {% if form.username.errors %}
+          {{ form.username(class="form-control form-control-lg is-invalid") }}
+          <div class="invalid-feedback">
+            {% for error in form.username.errors %}
+              <span>{{ error }}</span>
+          </div>
+            {% endfor %}
+        {% else %}
+          {{ form.username(class="form-control form-control-lg") }}
+        {% endif %}
+      </div>
+      <div class="form-group">
+        {{ form.password.label(class="form-control-label") }}
+          
+        {% if form.password.errors %}
+          {{ form.password(class="form-control form-control-lg is-invalid") }}
+          <div class="invalid-feedback">
+            {% for error in form.password.errors %}
+              <span>{{ error }}</span>
+          </div>
+            {% endfor %}
+        {% else %}
+          {{ form.password(class="form-control form-control-lg") }}
+        {% endif %}
+      </div>
+
+      <div>
+        {{ form.remember() }}
+        {{ form.remember.label(class="form-check-label") }}
+      </div>
+    </fieldset>
+
+    <div class="form-group">
+      {{ form.submit(class="btn btn-outline-info")}}
+    </div>
+  </form>
+</div>
+
+</div>
+
+<div></div>
+
+{% endblock content %}

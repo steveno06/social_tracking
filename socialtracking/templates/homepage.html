@@ -1,0 +1,22 @@
+{% extends "layout.html" %}
+
+{% block content %}
+    <h1>Home page</h1>
+    <br>
+    <div class="logs">
+        {% for post in posts %}
+            <article class="media content-section">
+                <div class="media-body"> 
+                    <div class="article-metadata">
+                        <h2 class="mr-2"><a href="{{ url_for('log', post_id = post.id) }}">{{ post.location }}</a></h2>
+                    </div>
+                    
+                    <p class="article-title"> <b>Details: </b> {{ post.content }}</p>
+                    <p class="article-contents"><b>Date: </b> {{ post.date_met.strftime('%Y-%m-%d') }}<p>
+                </div>
+            </article>
+
+        {% endfor %}
+
+    </div>
+{% endblock content %}

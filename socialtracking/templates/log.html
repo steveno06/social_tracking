@@ -1,0 +1,60 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+   
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+    <header>
+
+    
+    <div class="container">
+        <div class="logo">
+            <h2>Social Tracking</h2>
+        </div>
+        
+        <nav>
+            <ul>
+                <li><a href="#">Login</a></li>
+                <li><a href="#">Register</a></li>
+
+            </ul>
+        </nav>
+
+    </div>
+</header>
+
+<h1>Home page</h1>
+{% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+        {% for category, message in messages %}
+            <div>
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
+{% endwith %}
+
+<div>
+   
+        <article>
+            <div>
+                <div>
+                    <a href="#"> {{ post.author.username }} </a>
+                    <small>{{ post.date_met.strftime('%Y-%m-%d') }}</small>
+                </div>
+                <h2>{{ post.location }}</h2>
+                <p> {{ post.content }}</p>
+
+            </div>
+        </article>
+
+
+</div>
+
+    
+</body>
+</html>

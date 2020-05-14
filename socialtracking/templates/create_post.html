@@ -1,0 +1,24 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+  <h1>Create Post</h1>
+    <form method="POST" action="">
+      {{ form.hidden_tag() }}
+      <fieldset>
+        <div>
+          {{ form.name_title.label() }}
+          {{ form.name_title() }}
+        </div>
+        <div>
+          {{ form.content.label() }}
+          {{ form.content() }}
+        </div>
+      </fieldset>
+
+      <div>
+        {{ form.submit()}}
+      </div>
+    </form>
+{% endblock content %}
+  
