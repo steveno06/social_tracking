@@ -24,5 +24,5 @@ class Post(db.Model): #Structure of the database for the posts/entries that each
      user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False) #Each post has one author
 
      def __repr__(self):
-         return "Post('{}', '{}', '{}')".format(self.location, self.date_met, self.content)
+         return "Post('{}', '{}', '{}')".format(self.person_met, self.date_met, self.content)
 

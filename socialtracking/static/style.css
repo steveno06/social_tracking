@@ -57,7 +57,7 @@ nav a:hover{
 }
 
 .left {
-  width: 30%;
+  width: 50%;
   float: left;
   padding: 20px;
   text-align: justify;
@@ -104,6 +104,10 @@ h1{
   .article-metadata a:hover {
     color: #333;
     text-decoration: none;
+  }
+
+  .search {
+
   }
 
 

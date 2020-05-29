@@ -3,12 +3,27 @@
 {% block content %}
     <h1>Home page</h1>
     <br>
+    <form method="POST" class= "form-inline row justify-content-end" action="">
+        {{ form.hidden_tag() }}
+        <fieldset class="form-group mb-2">
+    
+          <div>
+            {{ form.search_field() }}
+          </div>
+        </fieldset>
+    
+        <div class="form-group mx-sm-3 mb-2">
+          {{ form.submit(class="btn btn-outline-info")}}
+        </div>
+      </form>
+
+    <br>
     <div class="logs">
-        {% for post in posts %}
+        {% for post in posts.items %}
             <article class="media content-section">
                 <div class="media-body"> 
                     <div class="article-metadata">
-                        <h2 class="mr-2"><a href="{{ url_for('log', post_id = post.id) }}">{{ post.location }}</a></h2>
+                        <h2 class="mr-2"><a href="{{ url_for('posts.log', post_id = post.id) }}">{{ post.person_met }}</a></h2>
                     </div>
                     
                     <p class="article-title"> <b>Details: </b> {{ post.content }}</p>
@@ -19,4 +34,16 @@
         {% endfor %}
 
     </div>
+
+    {% for page_num in posts.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
+      {% if page_num %}
+        {% if posts.page == page_num %}
+        <a class="btn btn-info mb-4" href="{{ url_for('main.homepage', page=page_num) }}">{{ page_num }}</a>
+        {% else%}
+          <a class="btn btn-outline-info mb-4" href="{{ url_for('main.homepage', page=page_num) }}">{{ page_num }}</a>
+        {% endif %}
+      {% else %}
+      {% endif %}
+    {% endfor %}
+
 {% endblock content %}
