@@ -18,7 +18,7 @@ def new_post():
     return render_template("create_post.html", form=form)
 
 
-@posts.route('/homepage/<int:post_id>')
+@posts.route('/homepage/<int:post_id>') #Route for a specific post
 def log(post_id):
     post = Post.query.get_or_404(post_id)
     if post.author != current_user:             #make sure that only the owner can access the tracker, dont allow access to ther peoples trackers
@@ -27,33 +27,33 @@ def log(post_id):
         return render_template('log.html', title=post.person_met, post=post)
 
 
-@posts.route("/homepage/<int:post_id>/update", methods=['GET', 'POST'])
+@posts.route("/homepage/<int:post_id>/update", methods=['GET', 'POST']) #Route to modify a post
 @login_required
 def update_post(post_id):
-    post = Post.query.get_or_404(post_id)
+    post = Post.query.get_or_404(post_id) #Make sure the post exists
     if post.author != current_user:
         abort(403)
     form = PostForm()
-    if form.validate_on_submit():
+    if form.validate_on_submit(): #When the button is click, retreive the new information and update the database
         post.person_met = form.name_title.data
         post.content = form.content.data
         db.session.commit()
         flash('Your post has been updated!', 'success')
         return redirect(url_for('main.homepage', post_id=post.id))
-    elif request.method == 'GET':
+    elif request.method == 'GET': #If not fill in the text fields with the information from the database
         form.name_title.data = post.person_met
         form.content.data = post.content
     return render_template('create_post.html', title='Update Post',
                            form=form)
 
     
-@posts.route("/homepage/<int:post_id>/delete", methods=['POST'])
+@posts.route("/homepage/<int:post_id>/delete", methods=['POST']) #Route to delete the posts
 @login_required
 def delete_post(post_id):
     post = Post.query.get_or_404(post_id)
-    if post.author != current_user:
+    if post.author != current_user: #Make sure that the user is the author of the entry
         abort(403)
     db.session.delete(post)
     db.session.commit()
     flash('Your post has been deleted!', 'success')
-    return redirect(url_for('main.homepage'))
+    return redirect(url_for('main.homepage')) #After giving user feedback, redirect to homepage.

@@ -13,7 +13,7 @@ class User(db.Model, UserMixin): #Structure of the database for the users
     password = db.Column(db.String(60), nullable=False)
     posts = db.relationship('Post', backref='author', lazy=True)
 
-    def __repr__(self):
+    def __repr__(self): #Way to format output and get all basic information fast.
         return "User('{}')".format(self.username)
 
 class Post(db.Model): #Structure of the database for the posts/entries that each user makes
@@ -23,6 +23,6 @@ class Post(db.Model): #Structure of the database for the posts/entries that each
      content = db.Column(db.Text, nullable=False)
      user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False) #Each post has one author
 
-     def __repr__(self):
-         return "Post('{}', '{}', '{}')".format(self.person_met, self.date_met, self.content)
+     def __repr__(self): #Way to format output and get all basic information fast.
+         return "Post('{}', '{}', '{}')".format(self.person_met, self.date_met, self.content) 
 

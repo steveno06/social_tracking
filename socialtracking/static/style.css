@@ -1,4 +1,4 @@
-.navbody {
+.navbody { /* CSS for the navigation bar */
     margin: 0;
     font-weight: 300;
 }
@@ -56,7 +56,7 @@ nav a:hover{
     color: black;
 }
 
-.left {
+.left { /* CSS for postioning the contents on the login page */
   width: 50%;
   float: left;
   padding: 20px;
@@ -74,7 +74,7 @@ h1{
   text-align: center;
 }
 
-.content-section {
+.content-section { /* CSS for formating of the posts*/
     background: #ffffff;
     padding: 10px 20px;
     border: 1px solid #dddddd;
@@ -104,10 +104,6 @@ h1{
   .article-metadata a:hover {
     color: #333;
     text-decoration: none;
-  }
-
-  .search {
-
   }
 
 

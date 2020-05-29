@@ -1,4 +1,4 @@
-{% extends "layout.html" %}
+{% extends "layout.html" %}<!-- Inherit from the layout.html file -->
 
 {% block content %}
     <h1>Home page</h1>
@@ -13,17 +13,17 @@
         </fieldset>
     
         <div class="form-group mx-sm-3 mb-2">
-          {{ form.submit(class="btn btn-outline-info")}}
+          {{ form.submit(class="btn btn-outline-info")}} <!-- Getting the information from the forms and adding it to html -->
         </div>
       </form>
 
     <br>
     <div class="logs">
-        {% for post in posts.items %}
+        {% for post in posts.items %} <!-- Iterating through all of the posts -->
             <article class="media content-section">
                 <div class="media-body"> 
                     <div class="article-metadata">
-                        <h2 class="mr-2"><a href="{{ url_for('posts.log', post_id = post.id) }}">{{ post.person_met }}</a></h2>
+                        <h2 class="mr-2"><a href="{{ url_for('posts.log', post_id = post.id) }}">{{ post.person_met }}</a></h2> <!-- Printing the information of each post into the html -->
                     </div>
                     
                     <p class="article-title"> <b>Details: </b> {{ post.content }}</p>
@@ -35,12 +35,12 @@
 
     </div>
 
-    {% for page_num in posts.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
+    {% for page_num in posts.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %} <!-- Creating the page links at the bottom of the page -->
       {% if page_num %}
-        {% if posts.page == page_num %}
+        {% if posts.page == page_num %} <!-- Different CSS for the page that we are on -->
         <a class="btn btn-info mb-4" href="{{ url_for('main.homepage', page=page_num) }}">{{ page_num }}</a>
         {% else%}
-          <a class="btn btn-outline-info mb-4" href="{{ url_for('main.homepage', page=page_num) }}">{{ page_num }}</a>
+          <a class="btn btn-outline-info mb-4" href="{{ url_for('main.homepage', page=page_num) }}">{{ page_num }}</a> <!-- Create button for each page link -->
         {% endif %}
       {% else %}
       {% endif %}
