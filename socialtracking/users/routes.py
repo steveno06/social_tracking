@@ -15,10 +15,6 @@ def commit_fields_to_database(form, hashed_password):
         db.session.add(user)
         db.session.commit()
 
-def logged_in(current_user):
-    if current_user.is_authenticated: 
-        return True
-
 def is_a_user(user, form):
     if user and bcrypt.check_password_hash(user.password, form.password.data):
         login_user(user, remember=form.remember.data)
