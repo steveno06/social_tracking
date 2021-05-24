@@ -3,13 +3,13 @@ from flask_login import login_user, current_user, logout_user, login_required
 from socialtracking import db, bcrypt
 from socialtracking.models import User, Post
 from socialtracking.users.forms import RegistrationForm, LoginForm
+from socialtracking.users.middleware import loggedIn_middleware
 
 users = Blueprint('users', __name__)
 
 @users.route('/', methods=['GET', 'POST'])
+@loggedIn_middleware
 def home():                                     #First thing user sees AKA home, but also acts like the login page to site.
-    if current_user.is_authenticated:
-        return redirect(url_for('main.homepage'))
     form = LoginForm()
     if form.validate_on_submit():
         user = User.query.filter_by(username=form.username.data).first()
@@ -21,9 +21,8 @@ def home():                                     #First thing user sees AKA home,
     return render_template('home.html', form=form)
 
 @users.route('/register', methods=['GET', 'POST']) #Users can register for an account
+@loggedIn_middleware
 def register():
-    if current_user.is_authenticated: #Check if a user is already logged in
-        return redirect(url_for('main.homepage'))
     form = RegistrationForm()
     if form.validate_on_submit():
         hashed_password = bcrypt.generate_password_hash(form.password.data).decode('utf-8') #Encrypt the password so that its not plain text in database

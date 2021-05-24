@@ -7,6 +7,7 @@ from flask_login import login_user, current_user, logout_user, login_required
 posts = Blueprint('posts', __name__)
 
 @posts.route('/homepage/create', methods=['GET', 'POST']) #Page where user creates a new entry to be added in the database.
+@login_required
 def new_post():
     form= PostForm()
     if form.validate_on_submit():
@@ -19,6 +20,7 @@ def new_post():
 
 
 @posts.route('/homepage/<int:post_id>') #Route for a specific post
+@login_required
 def log(post_id):
     post = Post.query.get_or_404(post_id)
     if post.author != current_user:             #make sure that only the owner can access the tracker, dont allow access to ther peoples trackers
