@@ -2,7 +2,7 @@ from datetime import datetime
 from socialtracking import db, login_manager
 from flask_login import UserMixin
 
-@login_manager.user_loader #Work in progress, checks which users are currently logged in.
+@login_manager.user_loader #Checks which users are currently logged in.
 def load_user(user_id):
     return User.query.get(int(user_id))
 
