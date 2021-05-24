@@ -3,6 +3,7 @@ from flask_login import login_user, current_user, logout_user, login_required
 from socialtracking import db, bcrypt
 from socialtracking.models import User, Post
 from socialtracking.users.forms import RegistrationForm, LoginForm
+from socialtracking.users.middleware import loggedIn_middleware
 
 users = Blueprint('users', __name__)
 
@@ -25,10 +26,8 @@ def is_a_user(user, form):
 
 
 @users.route('/', methods=['GET', 'POST'])
+@loggedIn_middleware
 def home():                                     #First thing user sees AKA home, but also acts like the login page to site.
-    if logged_in(current_user):
-        return redirect(url_for('main.homepage'))
-    
     form = LoginForm()
     
     if form.validate_on_submit():
@@ -41,10 +40,8 @@ def home():                                     #First thing user sees AKA home,
     return render_template('home.html', form=form)
 
 @users.route('/register', methods=['GET', 'POST']) #Users can register for an account
+@loggedIn_middleware
 def register():
-    if logged_in(current_user):
-        return redirect(url_for('main.homepage'))
-    
     form = RegistrationForm()
     
     if form.validate_on_submit():
