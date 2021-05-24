@@ -20,12 +20,12 @@ def create_app(config_class=Config):  #set up for the whole application, setting
     bcrypt.init_app(app)
     login_manager.init_app(app)
 
-    from socialtracking.users.routes import users #Get the blueprint objects from each file
+    from socialtracking.users.routes import users #Extract
     from socialtracking.posts.routes import posts
     from socialtracking.main.routes import main
 
     app.register_blueprint(users)#Initialize the blueprints to be used through the project
-    app.register_blueprint(posts)
+    app.register_blueprint(posts)#Extract
     app.register_blueprint(main)
 
     return app
