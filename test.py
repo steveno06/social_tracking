@@ -16,11 +16,15 @@ class FlaskTestCase(unittest.TestCase):
         tester = app.test_client(self)
         response = tester.get('/', content_type='html/text')
         self.assertTrue(b'Corona Virus Impact Reduction App' in response.data)
+        self.assertTrue(b'The Project' in response.data)
+        self.assertTrue(b'Username' in response.data)
 
 
     def test_register_page(self):
         tester = app.test_client(self)
         response = tester.get('/register', content_type='html/text')
+        self.assertTrue(b'Register' in response.data)
+        self.assertTrue(b'Confirm Password' in response.data)
         self.assertTrue(b'Already have an account' in response.data)
 
     def test_home_page(self):
